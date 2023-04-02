@@ -1,32 +1,60 @@
 import React from 'react';
 import {
+  Image,
   SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/Header';
 
 const HomeScreen = props => {
   const {navigation, route} = props;
   return (
     <SafeAreaView>
-      <Header navigation={navigation} route={route} hasBack={true} />
+      <Header navigation={navigation} route={route} title="AnaSayfa" />
       <View style={styles.homeWrapper}>
-        <Text style={styles.homeText}>Home Screen</Text>
-        <TouchableOpacity style={styles.touchableWrapper}>
-          <Text
-            style={styles.touchableText}
-            onPress={() =>
-              navigation.navigate('Profile', {parametre: 'deneme'})
-            }>
-            Go to Profile Screen
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.imageWrapper}>
+          <View>
+            <Text style={styles.imageTopText}>
+              Web & Mobil Uygulama Dünyası
+            </Text>
+          </View>
+          <Image
+            style={styles.image}
+            resizeMode="contain"
+            source={require('../assets/images/programmer.gif')}
+          />
+          <View>
+            <Text style={styles.imageText}>
+              Her şey hayal etmekle başladı. Sonrası araştırıp, öğrenip
+              gerçekleştirmeye kaldı.
+            </Text>
+          </View>
+        </View>
+        <LinearGradient
+          colors={['#FF0099', '#512DA8']}
+          style={styles.linearGradientBtn}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('About')}
+            style={styles.touchableWrapper}>
+            <Text style={styles.touchableText}>About'a git</Text>
+          </TouchableOpacity>
+        </LinearGradient>
       </View>
     </SafeAreaView>
   );
+};
+
+const fonts = {
+  Montserrat: {
+    regular: 'Montserrat-Regular',
+    medium: 'Montserrat-Medium',
+    semiBold: 'Montserrat-SemiBold',
+    bold: 'Montserrat-Bold',
+  },
 };
 
 const styles = StyleSheet.create({
@@ -34,24 +62,53 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '93%',
-    backgroundColor: '#3F4E4F',
+    backgroundColor: '#fff',
+  },
+  imageWrapper: {
+    marginHorizontal: 20,
+  },
+  image: {
+    width: 350,
+    height: 350,
+  },
+  imageTopText: {
+    fontFamily: fonts.Montserrat.bold,
+    textAlign: 'center',
+    fontSize: 21,
+    marginHorizontal: 20,
+  },
+  imageText: {
+    fontFamily: fonts.Montserrat.medium,
+    textAlign: 'center',
+    fontSize: 15,
+    marginHorizontal: 20,
+    lineHeight: 25,
   },
   homeText: {
-    fontWeight: '700',
     fontSize: 29,
     color: '#fff',
+    fontFamily: fonts.Montserrat.medium,
+  },
+  touchableContainer: {
+    // justifyContent: 'center',
+    // alignItems: 'flex-end',
   },
   touchableWrapper: {
-    backgroundColor: '#A27B5C',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
+    paddingVertical: 10,
+    width: 225,
     borderRadius: 5,
-    marginVertical: 20,
   },
   touchableText: {
     color: '#fff',
-    fontWeight: '700',
-    fontSize: 17,
+    fontSize: 16,
+    fontFamily: fonts.Montserrat.bold,
+    paddingHorizontal: 20,
+    textAlign: 'center',
+  },
+  linearGradientBtn: {
+    height: 40,
+    borderRadius: 5,
+    marginVertical: 30,
   },
 });
 

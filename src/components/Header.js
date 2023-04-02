@@ -1,21 +1,42 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const Header = ({navigation, route, hasBack = false}) => {
+const Header = ({
+  navigation,
+  route,
+  hasBack = false,
+  onBack = () => {},
+  title = '',
+}) => {
   return (
     <View style={styles.headerWrapper}>
       {hasBack && (
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.headerIconWrapper}>
-          <Ionicons name="arrow-back-circle" size={29} color="#EA5455" />
+        <TouchableOpacity onPress={onBack} style={styles.headerIconWrapper}>
+          <Ionicons name="arrow-back-circle" size={39} color={'#FF0099'} />
         </TouchableOpacity>
       )}
-      <Text style={styles.headerText}>Header</Text>
+      <View style={styles.imageWrapper}>
+        <Image
+          style={styles.image}
+          resizeMode="contain"
+          source={require('../assets/images/mernmania-logo.png')}
+        />
+        <Text style={styles.headerText}>{title}</Text>
+      </View>
     </View>
   );
+};
+
+const fonts = {
+  Montserrat: {
+    regular: 'Montserrat-Regular',
+    medium: 'Montserrat-Medium',
+    semiBold: 'Montserrat-SemiBold',
+    bold: 'Montserrat-Bold',
+  },
 };
 
 const styles = StyleSheet.create({
@@ -24,17 +45,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '7%',
-    backgroundColor: '#DCD7C9',
+    backgroundColor: '#fff',
     position: 'relative',
   },
   headerText: {
-    fontWeight: '700',
-    fontSize: 19,
+    fontSize: 15,
     color: '#3F4E4F',
+    fontFamily: fonts.Montserrat.semiBold,
+    marginStart: 20,
   },
   headerIconWrapper: {
     position: 'absolute',
-    left: 20,
+    left: 10,
+  },
+  imageWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: 50,
+    height: 50,
   },
 });
 

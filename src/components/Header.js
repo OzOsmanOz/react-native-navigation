@@ -10,9 +10,17 @@ const Header = ({
   hasBack = false,
   onBack = () => {},
   title = '',
+  isDrawer = false,
 }) => {
   return (
     <View style={styles.headerWrapper}>
+      {isDrawer && (
+        <TouchableOpacity
+          onPress={() => navigation.toggleDrawer()}
+          style={styles.headerIconWrapper}>
+          <Ionicons name="filter-outline" size={25} color={'#FF0099'} />
+        </TouchableOpacity>
+      )}
       {hasBack && (
         <TouchableOpacity onPress={onBack} style={styles.headerIconWrapper}>
           <Ionicons name="arrow-back-circle" size={39} color={'#FF0099'} />

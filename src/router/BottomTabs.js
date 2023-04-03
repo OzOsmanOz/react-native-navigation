@@ -7,6 +7,7 @@ import ProfileStack from './ProfileStack';
 import HomeStack from './HomeStack';
 import ContactStack from './ContactStack';
 import StudiesStack from './StudiesStack';
+import DrawerNav from './DrawerNav';
 
 const Tab = createBottomTabNavigator();
 
@@ -144,6 +145,39 @@ const BottomTabs = () => {
         }}
         name="ContactStack"
         component={ContactStack}
+      />
+      <Tab.Screen
+        listeners={({navigation}) => ({
+          tabPress: event => {
+            event.preventDefault();
+            navigation.navigate('Drawer', {screen: 'ContactScreen'});
+          },
+        })}
+        options={{
+          tabBarLabel: ({focused, color}) => {
+            return (
+              <Text
+                style={[
+                  styles.bottomTabsText,
+                  {
+                    color: focused ? '#512DA8' : '#3F4E4F',
+                    fontSize: focused ? 16 : 15,
+                  },
+                ]}>
+                Drawer
+              </Text>
+            );
+          },
+          tabBarIcon: ({focused, color, size}) => (
+            <Ionicons
+              name={focused ? 'globe' : 'globe-outline'}
+              color={focused ? '#512DA8' : '#3F4E4F'}
+              size={focused ? 25 : 23}
+            />
+          ),
+        }}
+        name="Drawer"
+        component={DrawerNav}
       />
     </Tab.Navigator>
   );

@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   socialImage: {
-    with: 275,
+    width: 375,
     height: 375,
   },
   imageGroup: {
